@@ -1,6 +1,42 @@
 // MOVI v7 — Courier Management App
 const $ = (sel, root=document) => root.querySelector(sel);
 const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
+// MOVI v7 — Courier Management App
+const $ = (sel, root=document) => root.querySelector(sel);
+const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
+const fmt = (d)=> new Date(d).toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'});
+const todayISO = ()=> new Date().toISOString().slice(0,10);
+const addDaysISO = (iso, delta)=>{ const d=new Date(iso); d.setDate(d.getDate()+delta); return d.toISOString().slice(0,10); };
+const addMonthsISO = (iso, delta)=>{ const d=new Date(iso); d.setMonth(d.getMonth()+delta); return d.toISOString().slice(0,10); };
+
+// ===== ТЕЛЕГРАМ MINI APP ИНТЕГРАЦИЯ =====
+let tg = window.Telegram?.WebApp;
+
+if (tg) {
+  tg.ready();
+  tg.expand();
+  
+  const user = tg.initDataUnsafe?.user;
+  if (user) {
+    userProfile.name = user.first_name || userProfile.name;
+    userProfile.phone = user.phone_number ? formatRUPhone(user.phone_number) : userProfile.phone;
+    saveLS('movi_profile', userProfile);
+  }
+  
+  const theme = tg.colorScheme;
+  document.documentElement.setAttribute('data-theme', theme);
+  document.querySelector('.nav').style.display = 'none';
+}
+
+function closeMiniApp() {
+  if (tg) tg.close();
+}
+// ===== КОНЕЦ ТЕЛЕГРАМ ИНТЕГРАЦИИ =====
+
+// ДАЛЕЕ ИДЕТ ОСТАЛЬНАЯ ЛОГИКА ПРИЛОЖЕНИЯ
+let currentDate = todayISO();
+let currentFilter = 'all';
+// ... остальной код app.js ...
 const fmt = (d)=> new Date(d).toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'});
 const todayISO = ()=> new Date().toISOString().slice(0,10);
 const addDaysISO = (iso, delta)=>{ const d=new Date(iso); d.setDate(d.getDate()+delta); return d.toISOString().slice(0,10); };
