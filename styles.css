@@ -127,3 +127,32 @@ textarea{ min-height:84px; resize:vertical; }
 .setting-row{ display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); }
 .setting-title{ font-weight:600; }
 .setting-desc{ font-size:12px; color:var(--muted); margin-top:2px; }
+/* Добавьте в конец файла styles.css */
+
+/* Telegram Mini App адаптация */
+@media (max-height: 600px) {
+  .app { max-height: 100vh; overflow: hidden; }
+  header { padding: 6px 12px 4px; }
+  .content { padding: 8px 12px 60px; }
+}
+
+/* Кнопка закрытия для Telegram */
+.close-btn {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: white;
+  border: none;
+  font-size: 20px;
+  z-index: 100;
+  display: none;
+  cursor: pointer;
+}
+
+.telegram-app .close-btn {
+  display: block;
+}
