@@ -257,5 +257,17 @@
   <div class="toast" id="toast"><span></span></div>
 
   <script src="app.js"></script>
+<!-- Добавьте перед закрывающим </body> -->
+<script>
+if (window.Telegram && Telegram.WebApp) {
+  document.body.classList.add('telegram-app');
+  
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'close-btn';
+  closeBtn.innerHTML = '×';
+  closeBtn.onclick = () => Telegram.WebApp.close();
+  document.body.appendChild(closeBtn);
+}
+</script>
 </body>
 </html>
